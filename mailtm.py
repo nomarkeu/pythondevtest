@@ -72,6 +72,14 @@ async def client(message):
     writer.write(message.encode())
     await writer.drain()
 
+    data = await reader.read(100)
+    print(f'Received: {data.decode()!r}')
 
-asyncio.run(client("Hello World!"))
+    print('Close the connection')
+    writer.close()
+    await writer.wait_closed()
+
+
+array = [1,2,3,4,];
+asyncio.run(client(array))
 
